@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<html>
+<head>
+    <title>Django Girls blog</title>
+    <meta name="description" value = "Song list"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+
+<div class="page-header">
+    {% if user.is_authenticated %}
+    <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span> </a>
+    <a href="blog/Calendar.html" class="top-menu">abababa</span></a>
+    {% endif %}
+    <h1><a href="/">Django Girls Blog</a></h1>
+</div>
+<div class="row" id="sub-header">
+    <div class="col-xs-12">
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#">
+                    Calendar
+                </a>
+            </li>
+            <li role="presentation">
+                <a href="">
+                    Song list
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+</div>
+<div class="content container">
+    <div class="row">
+        <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+</body>
+</html>
