@@ -21,6 +21,10 @@
 
 
 {% block content %}
+<form method="GET" action="" style="position:relative;left:70%;">
+<input type="search" name="query" value="{{request.GET.query}}"/>
+<input type="submit" value="Search"/>
+</form>
             {% for post in posts %}
 
 

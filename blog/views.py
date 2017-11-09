@@ -7,7 +7,12 @@ from django.shortcuts import redirect
 # Create your views here.
 
 def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+
+    query = request.GET.get("query")
+    if query:
+        posts = Post.objects.filter(title__icontains=query)
+    else:
+        posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 def calendar(request):
