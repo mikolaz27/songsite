@@ -4,7 +4,7 @@ from django.utils import timezone
 from .models import Post
 from .forms import PostForm
 from django.shortcuts import redirect
-from re import findall
+from re import findall,match,sub,compile
 
 # Create your views here.
 
@@ -43,8 +43,9 @@ def post_detail(request, pk):
 
     text = post.text
 
-    list_chords = findall(r'',text)
-
+    pattern = compile(r'([A-H]#?m?7?s?u?s?2? |[A-H]#?m?7?s?u?s?2?\r\n)')
+    # text = text.replace('\n', "")
+    text = sub(pattern, lambda x: '<strong>' + x.group(1) + '</strong>', text)
 
 
     context = {"title": post.title,

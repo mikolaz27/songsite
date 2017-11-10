@@ -1,17 +1,20 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
+<div class="row">
+
     <div class="post">
         {% if post.published_date %}
-            <div class="date">
-                {{ post.published_date }}
-            </div>
+        <div class="date">
+            {{ post.published_date }}
+        </div>
         {% endif %}
         {% if user.is_authenticated %}
         <h1>
-        <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}" ><span class="glyphicon glyphicon-pencil"></span></a>
+            <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span
+                    class="glyphicon glyphicon-pencil"></span></a>
         </h1>
-            {% endif %}
+        {% endif %}
         <p>
             {% if post.image %}
             <img src='{{post.image.url}}' class="img-responsive">
@@ -22,11 +25,30 @@
                 <source src="{{post.music.url}}" type="audio/mpeg">
             </audio>
             {%endif %}
-
         </p>
+        <div class="col-sm-9 col-md-6 col-lg-8">
 
-        <h1>{{ post.title }}</h1>
 
-        <p>{{ post.text|linebreaksbr }}</p>
+            <h1>{{ post.title }}</h1>
+
+
+            <p>{{ text|safe|linebreaksbr }}</p>
+
+            <!--<p>{{ post.text|linebreaksbr}}</p>-->
+        </div>
     </div>
+    <div class="col-sm-3 col-md-6 col-lg-4">
+        <div class="btn-group-vertical">
+            <button type="button" class="btn btn-primary">C</button>
+            <button type="button" class="btn btn-primary">D</button>
+            <button type="button" class="btn btn-primary">E</button>
+            <button type="button" class="btn btn-primary">F</button>
+            <button type="button" class="btn btn-primary">G</button>
+            <button type="button" class="btn btn-primary">A</button>
+            <button type="button" class="btn btn-primary">B</button>
+
+        </div>
+    </div>
+
+</div>
 {% endblock %}
