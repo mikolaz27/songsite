@@ -1,6 +1,8 @@
 from django.conf.urls import url,include
 from accounts.views import (login_view, logout_view, register_view)
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^$', views.post_list, name='post_list'),
@@ -12,3 +14,7 @@ urlpatterns = [
     url(r'^logout/',logout_view,name='logout'),
     url(r'^register/',register_view,name='register'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
