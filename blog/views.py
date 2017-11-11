@@ -4,7 +4,7 @@ from django.utils import timezone
 from .models import Post
 from .forms import PostForm
 from django.shortcuts import redirect
-from re import findall,match,sub,compile
+from re import findall, match, sub, compile
 
 # Create your views here.
 
@@ -38,6 +38,32 @@ def calendar(request):
     return render(request, 'blog/Calendar.html')
 
 
+def post_text(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    if request.method == 'POST':
+        # query = request.POST.get("formText")
+        query = "A"
+    elif request.method == 'GET':
+            query = request.GET.get("C")
+
+    else:
+        query = 'C'
+
+    print(query)
+
+    text = post.text
+
+    pattern = compile(r'([A-H]#?m?7?s?u?s?2? |[A-H]#?m?7?s?u?s?2?\r\n)')
+    # text = text.replace('\n', "")
+    text = sub(pattern, lambda x: '<strong>' + query + x.group(1) + '</strong>', text)
+    context = {"title": post.title,
+               "post": post,
+               "text": text
+               }
+    return render(request, 'blog/post_detail.html', context)
+
+
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
 
@@ -46,7 +72,6 @@ def post_detail(request, pk):
     pattern = compile(r'([A-H]#?m?7?s?u?s?2? |[A-H]#?m?7?s?u?s?2?\r\n)')
     # text = text.replace('\n', "")
     text = sub(pattern, lambda x: '<strong>' + x.group(1) + '</strong>', text)
-
 
     context = {"title": post.title,
                "post": post,

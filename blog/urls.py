@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^login/',login_view,name='login'),
     url(r'^logout/',logout_view,name='logout'),
     url(r'^register/',register_view,name='register'),
+    url(r'post/(?P<pk>[0-9]+)/Tune',views.post_text,name='post_text')
 ]
 
 if settings.DEBUG:

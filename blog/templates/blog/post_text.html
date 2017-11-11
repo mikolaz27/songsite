@@ -1,0 +1,7 @@
+{% extends 'blog/post_detail.html' %}
+
+{% block content_text %}
+
+<!--<p>Sometext</p>-->
+<p>{{ context.text|safe|linebreaksbr }}</p>
+{% endblock %}
