@@ -16,6 +16,10 @@ urlpatterns = [
     url(r'post/(?P<pk>[0-9]+)/Tune',views.post_text,name='post_text')
 ]
 
+# if settings.DEBUG:
+#     urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+#     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
